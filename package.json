@@ -1,0 +1,18 @@
+{
+  "name": "functional-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "fp-ts": "^1.12.2",
+    "typescript": "^3.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "exec": "npx tsc index.ts && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
