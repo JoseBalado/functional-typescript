@@ -1,5 +1,6 @@
-## Install TypeScript with npm install typescript
+# Functional TypeScript
+### Install TypeScript with npm install typescript
 npm install typescript
 
-# Execute the code 
+### Execute the code 
 npm run exec
