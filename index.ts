@@ -60,4 +60,4 @@ let iteratorResult5 = frame.next(); //{ done: true }
 //It is possible to access the value of iterator result via the value property:
 let component = iteratorResult1.value; //Component { name: 'top' }
 
-console.log('asdac');
+console.log('asdaccpp');
