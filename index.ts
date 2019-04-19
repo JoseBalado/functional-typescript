@@ -44,8 +44,13 @@ const inverse = (x: number): Option<number> =>
   x === 0 ? none : some(1 / x)
 
 const doubleInverse = (x: number): Option<number> => inverse(x).map(double)
-console.log(doubleInverse(2)) // Some(1)
-console.log(doubleInverse(0)) // None
+console.log(
+doubleInverse(2)
+) // Some(1)
+
+console.log(
+doubleInverse(0)
+) // None
 
 const inc = (x: number): number => x + 1
 
