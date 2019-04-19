@@ -1,63 +1,48 @@
-import { some, option } from 'fp-ts/lib/Option'
-import { liftA2, sequenceT } from 'fp-ts/lib/Apply'
+// import { some, option } from 'fp-ts/lib/Option'
+// import { liftA2, sequenceT } from 'fp-ts/lib/Apply'
 
-const fa = some(1)
-const fb = some('foo')
-const f = (a: number) => (b: string): boolean => a + b.length > 2
+const xs = [1, 2, 3]
+const double = (x: number): number => x * 2
 
-const fc1 = some(f)
-  .ap_(fa)
-  .ap_(fb)
-const fc2 = fb.ap(fa.ap(some(f)))
-const fc3 = fb.ap(fa.map(f))
-const fc4 = liftA2(option)(f)(fa)(fb)
-const fc5 = sequenceT(option)(fa, fb).map(([a, b]) => f(a)(b))
-
-interface Iterator<T> {
-  next(value?: any): IteratorResult<T>;
-  return?(value?: any): IteratorResult<T>;
-  throw?(e?: any): IteratorResult<T>;
+const ys = []
+for (var i = 0; i < xs.length; i++) {
+  ys.push(double(xs[i]))
 }
 
-interface IteratorResult<T> {
-  done: boolean;
-  value: T;
-}
+const zs = xs.map(double)
 
-class Component {
-  constructor (public name: string) {}
-}
+console.log(zs)
 
-class Frame implements Iterator<Component> {
-
-  private pointer = 0;
-
-  constructor(public name: string, public components: Component[]) {}
-
-  public next(): IteratorResult<Component> {
-    if (this.pointer < this.components.length) {
-      return {
-        done: false,
-        value: this.components[this.pointer++]
-      }
-    } else {
-      return {
-        done: true,
-        value: { name: 'finish'}
-      }
-    }
+const f: { [key: number]: number } = {
+  1: 2,
+  2: 4,
+  3: 6
   }
 
+
+console.log(f)
+
+type Option<A> = None<A> | Some<A>
+class None<A> {
+  readonly _tag = 'None'
+  map<B>(f: (a: A) => B): Option<B> {
+    return none
+  }
+}
+class Some<A> {
+  readonly _tag = 'Some'
+  constructor(readonly value: A) { }
+  map<B>(f: (a: A) => B): Option<B> {
+    return some(f(this.value))
+  }
 }
 
-let frame = new Frame("Door", [new Component("top"), new Component("bottom"), new Component("left"), new Component("right")]);
-let iteratorResult1 = frame.next(); //{ done: false, value: Component { name: 'top' } }
-let iteratorResult2 = frame.next(); //{ done: false, value: Component { name: 'bottom' } }
-let iteratorResult3 = frame.next(); //{ done: false, value: Component { name: 'left' } }
-let iteratorResult4 = frame.next(); //{ done: false, value: Component { name: 'right' } }
-let iteratorResult5 = frame.next(); //{ done: true }
+const none: Option<never> = new None()
+const some = <A>(a: A): Option<A> => new Some(a)
 
-//It is possible to access the value of iterator result via the value property:
-let component = iteratorResult1.value; //Component { name: 'top' }
+const inverse = (x: number): Option<number> =>
+  x === 0 ? none : some(1 / x)
 
-console.log('asdaccpp');
+const doubleInverse = (x: number): Option<number> => inverse(x).map(double)
+console.log(doubleInverse(2)) // Some(1)
+console.log(doubleInverse(0)) // None
