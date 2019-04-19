@@ -46,3 +46,17 @@ const inverse = (x: number): Option<number> =>
 const doubleInverse = (x: number): Option<number> => inverse(x).map(double)
 console.log(doubleInverse(2)) // Some(1)
 console.log(doubleInverse(0)) // None
+
+const inc = (x: number): number => x + 1
+
+console.log(
+inverse(0)
+  .map(double)
+  .map(inc) // None
+)
+
+console.log(
+inverse(4)
+  .map(double)
+  .map(inc) // Some(1.5)
+)
