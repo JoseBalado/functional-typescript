@@ -36,4 +36,3 @@ console.log(
 console.log(
   inverse(0).fold(f, g) // 'cannot divide by zero'
 )
-
