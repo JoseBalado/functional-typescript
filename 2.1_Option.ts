@@ -1,4 +1,3 @@
-type Option<A> = None<A> | Some<A>
 class None<A> {
   readonly _tag = 'None'
   map<B>(f: (a: A) => B): Option<B> {
@@ -12,6 +11,8 @@ class Some<A> {
     return some(f(this.value))
   }
 }
+
+type Option<A> = None<A> | Some<A>
 
 const none: Option<never> = new None()
 const some = <A>(a: A): Option<A> => new Some(a)
