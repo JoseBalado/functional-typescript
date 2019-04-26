@@ -1,10 +1,12 @@
 # Functional TypeScript
-### Install TypeScript with npm install typescript
-npm install typescript
+### Install npm install
+npm install
 
 ### Execute the code 
+npm start
+
+### watch for changes
 npm run watch
 
 ### Debug
-#### use 'npm run watch' and start the program with VSCode debugger.
-#### console.log() messages appear in 'DEBUG CONSOLE'
+#### console.log() messages do not appear when using 'npm run watch'
