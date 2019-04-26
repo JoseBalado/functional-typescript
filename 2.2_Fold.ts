@@ -30,9 +30,9 @@ const f = (): string => "cannot divide by zero"
 const g = (x: number): string => "the result is " + x
 
 console.log(
-  inverse(2).fold(f, g) // 'the result is 0.5'
+inverse(2).fold(f, g) // 'the result is 0.5'
 )
 
 console.log(
-  inverse(0).fold(f, g) // 'cannot divide by zero'
+inverse(0).fold(f, g) // 'cannot divide by zero'
 )
