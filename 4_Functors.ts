@@ -30,7 +30,7 @@ const doubleInverse = (x: number): Either<string, number> =>
 console.log(
 doubleInverse(2) // Right(1)
 )
-
+  
 console.log(
 doubleInverse(0) // Left('cannot divide by zero')
 )
@@ -48,32 +48,4 @@ inverse(4)
   .map(double)
   .map(inc) // Right(1.5)
 )
-
-class Identity<A> {
-  constructor(readonly value: A) { }
-  map<B>(f: (a: A) => B): Identity<B> {
-    return new Identity(f(this.value))
-  }
-}
-
-interface User {
-  name: string
-}
-
-const identity = new Identity(5)
-const identity2 = new Identity({ name: 'John', surname: 'Doe' })
-
-const nameLength = (text : User): number => text.name.length
-
-console.log(identity)
-console.log(identity2)
-
-console.log(
-  identity
-    .map(double)
-)
-
-console.log(
-  identity2
-  .map(nameLength)
-)
+  
