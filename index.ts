@@ -69,11 +69,11 @@ console.log(identity)
 console.log(identity2)
 
 console.log(
-  identity
-    .map(double)
+identity
+  .map(double)
 )
 
 console.log(
-  identity2
+identity2
   .map(nameLength)
 )
