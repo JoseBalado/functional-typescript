@@ -30,7 +30,7 @@ const doubleInverse = (x: number): Either<string, number> =>
 console.log(
 doubleInverse(2) // Right(1)
 )
-  
+
 console.log(
 doubleInverse(0) // Left('cannot divide by zero')
 )
@@ -48,4 +48,55 @@ inverse(4)
   .map(double)
   .map(inc) // Right(1.5)
 )
-  
+
+// Identity Functor
+class Identity<A> {
+  constructor(readonly value: A) { }
+  map<B>(f: (a: A) => B): Identity<B> {
+    return new Identity(f(this.value))
+  }
+}
+
+interface User {
+  name: string
+}
+
+const identity = new Identity(5)
+const identity2 = new Identity({ name: 'John', surname: 'Doe' })
+
+const nameLength = (text : User): number => text.name.length
+
+console.log(identity)
+console.log(identity2)
+
+console.log(
+identity
+  .map(double)
+)
+
+console.log(
+identity2
+  .map(nameLength)
+)
+
+// Functor Array
+const functorArray = {
+  map: <A, B>(f: (a: A) => B, fa: Array<A>): Array<B> =>
+    fa.map(f)
+}
+
+const arrayNumbers: Array<number> = [1,2,3]
+
+const addOne = (x : number): number => x + 1
+
+console.log('functorArray',
+functorArray.map(addOne, arrayNumbers)
+)
+
+// Functor IO
+class IO<A> {
+  constructor(readonly run: () => A) { }
+  map<B>(f: (a: A) => B): IO<B> {
+    return new IO(() => f(this.run()))
+  }
+}
