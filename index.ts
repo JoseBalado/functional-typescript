@@ -100,3 +100,14 @@ class IO<A> {
     return new IO(() => f(this.run()))
   }
 }
+
+const log = (s: unknown): IO<void> => new IO(() => console.log(s))
+const helloIO = log('Hello')
+helloIO.run()
+
+// Not able to see any effect happening?
+const thunk = new IO(() => 'Hello')
+ thunk
+  .map(text => text + ' world again!!!')
+  .map(console.log.bind(console))
+  .run()
