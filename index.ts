@@ -111,3 +111,10 @@ const thunk = new IO(() => 'Hello')
   .map(text => text + ' world again!!!')
   .map(console.log.bind(console))
   .run()
+
+class Task<A> {
+  constructor(readonly run: () => Promise<A>) { }
+  map<B>(f: (a: A) => B): Task<B> {
+    return new Task(() => this.run().then(f))
+  }
+}
