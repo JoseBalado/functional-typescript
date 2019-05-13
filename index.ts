@@ -102,19 +102,26 @@ class IO<A> {
 }
 
 const log = (s: unknown): IO<void> => new IO(() => console.log(s))
-const helloIO = log('Hello')
+const helloIO = log('Hello IO')
 helloIO.run()
 
-// Not able to see any effect happening?
-const thunk = new IO(() => 'Hello')
- thunk
-  .map(text => text + ' world again!!!')
+const io = new IO(() => 'Hello IO')
+ io
+  .map(text => text + ' again!!!')
   .map(console.log.bind(console))
   .run()
 
+
+// Functor Task
 class Task<A> {
   constructor(readonly run: () => Promise<A>) { }
   map<B>(f: (a: A) => B): Task<B> {
     return new Task(() => this.run().then(f))
   }
 }
+
+// const myPromise = Promise.resolve('Hello Task!') 
+const task = new Task(() => Promise.resolve('Hello Task!'))
+task
+  .map(console.log.bind(console))
+  .run()
