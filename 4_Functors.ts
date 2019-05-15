@@ -100,3 +100,28 @@ class IO<A> {
     return new IO(() => f(this.run()))
   }
 }
+
+const log = (s: unknown): IO<void> => new IO(() => console.log(s))
+const helloIO = log('Hello IO')
+helloIO.run()
+
+const io = new IO(() => 'Hello IO')
+ io
+  .map(text => text + ' again!!!')
+  .map(console.log.bind(console))
+  .run()
+
+
+// Functor Task
+class Task<A> {
+  constructor(readonly run: () => Promise<A>) { }
+  map<B>(f: (a: A) => B): Task<B> {
+    return new Task(() => this.run().then(f))
+  }
+}
+
+// const myPromise = Promise.resolve('Hello Task!')
+const task = new Task(() => Promise.resolve('Hello Task!'))
+task
+  .map(console.log.bind(console))
+  .run()

@@ -120,7 +120,7 @@ class Task<A> {
   }
 }
 
-// const myPromise = Promise.resolve('Hello Task!') 
+// const myPromise = Promise.resolve('Hello Task!')
 const task = new Task(() => Promise.resolve('Hello Task!'))
 task
   .map(console.log.bind(console))

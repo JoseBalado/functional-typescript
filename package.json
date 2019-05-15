@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "npx tsc index.ts --sourceMap -t ES2017 -m 'CommonJS' && node index.js",
+    "start": "npx tsc 5_Contravariant_Functor.ts --sourceMap -t ES2017 -m 'CommonJS' && node index.js",
     "watch": "npx tsc index.ts -w --sourceMap -m 'CommonJS' -t  ES2017",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
