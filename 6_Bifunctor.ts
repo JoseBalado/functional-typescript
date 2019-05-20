@@ -11,5 +11,5 @@ const bimap = <L, V, A, B>(
   f: (l: L) => V,
   g: (a: A) => B
 ): Either<V, B> => {
-  return fla.fold(l => left(f(l))), a => a => right(g(a)))
+  return fla.fold(l => left(f(l))), a => right(g(a)))
 }
