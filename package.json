@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "npx tsc 6_Bifunctor.ts --sourceMap -t ES2017 -m 'CommonJS' && node 6_Bifunctor.js",
+    "start": "npx tsc 8_Semigroup.ts --sourceMap -t ES2017 -m 'CommonJS' && node 8_Semigroup.js",
     "watch": "npx tsc index.ts -w --sourceMap -m 'CommonJS' -t  ES2017",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
