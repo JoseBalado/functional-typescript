@@ -54,3 +54,12 @@ console.log(
 object.concat({ foo: 'bar', x: 42 }, { foo: 'baz', y: 13 })
 )
 
+// 8.5 The function fold
+const fold = <A>(S: Semigroup<A>) => (
+  a: A,
+  as: Array<A>
+): A => as.reduce((a, b) => S.concat(a, b), a)
+
+console.log(
+fold(sum)(10, [2,3,4,5])
+)
