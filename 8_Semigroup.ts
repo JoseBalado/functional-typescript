@@ -60,6 +60,19 @@ const fold = <A>(S: Semigroup<A>) => (
   as: Array<A>
 ): A => as.reduce((a, b) => S.concat(a, b), a)
 
-console.log(
+console.log('Fold sum 10 [2,3,4,5]:',
 fold(sum)(10, [2,3,4,5])
+)
+
+// Semigroup All
+const semigroupAll: Semigroup<boolean> = {
+  concat: (x, y) => x && y
+}
+
+console.log('SemigroupAll true [true, true]:',
+fold(semigroupAll)(true, [true, true])
+)
+
+console.log('SemigroupAll true, [true, false]:',
+fold(semigroupAll)(true, [true, false])
 )
