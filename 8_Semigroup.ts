@@ -54,7 +54,7 @@ console.log(
 object.concat({ foo: 'bar', x: 42 }, { foo: 'baz', y: 13 })
 )
 
-// 8.5 The function fold
+// 8.5 The fold function
 const fold = <A>(S: Semigroup<A>) => (
   a: A,
   as: Array<A>
@@ -75,4 +75,17 @@ fold(semigroupAll)(true, [true, true])
 
 console.log('SemigroupAll true, [true, false]:',
 fold(semigroupAll)(true, [true, false])
+)
+
+// Every
+type Predicate<A> = (a: A) => boolean
+
+const every = <A>(p: Predicate<A>, as: Array<A>): boolean =>
+fold(semigroupAll)(true, as.map(p))
+
+
+const odd = (number: number): boolean => number % 2 !== 1
+
+console.log(
+every(odd, [1,2,3,4])
 )
