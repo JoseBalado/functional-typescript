@@ -84,8 +84,24 @@ const every = <A>(p: Predicate<A>, as: Array<A>): boolean =>
 fold(semigroupAll)(true, as.map(p))
 
 
-const odd = (number: number): boolean => number % 2 !== 1
+const odd = (number: number): boolean => number % 2 !== 0
 
-console.log(
+console.log('every(odd, [1,2,3,4]):',
 every(odd, [1,2,3,4])
+)
+
+// Some
+const semigroupAny: Semigroup<boolean> = {
+  concat: (x, y) => x || y
+}
+
+const some = <A>(p: Predicate<A>, as: Array<A>): boolean =>
+  fold(semigroupAny)(false, as.map(p))
+
+console.log('some(odd, [1,2,3,4]):',
+some(odd, [1,2,3,4])
+)
+
+console.log('some(odd, [4,6]):',
+some(odd, [4,6])
 )
