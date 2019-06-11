@@ -105,3 +105,15 @@ some(odd, [1,2,3,4])
 console.log('some(odd, [4,6]):',
 some(odd, [4,6])
 )
+
+// Semigroup Object
+const semigroupObject: Semigroup<Object> = {
+  concat: (x, y) => ({ ...x, ...y })
+}
+
+const assign = (as: Array<Object>): Object =>
+  fold(semigroupObject)({}, as)
+
+console.log('assign([{ id: 1, name: "John"}, { id: 2, name: "Joe" }]):',
+assign([{ id: 3, name: 'John'}, { id: 1, surname: 'Smith' }])
+)
