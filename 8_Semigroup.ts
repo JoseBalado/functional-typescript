@@ -117,3 +117,37 @@ const assign = (as: Array<Object>): Object =>
 console.log('assign([{ id: 1, name: "John"}, { id: 2, name: "Joe" }]):',
 assign([{ id: 3, name: 'John'}, { id: 1, surname: 'Smith' }])
 )
+
+// TryFold
+class None<A> {
+  readonly _tag = 'None'
+  map<B>(f: (a: A) => B): Option<B> {
+    return optNone
+  }
+}
+class Some<A> {
+  readonly _tag = 'Some'
+  constructor(readonly value: A) { }
+  map<B>(f: (a: A) => B): Option<B> {
+    return optSome(f(this.value))
+  }
+}
+
+type Option<A> = None<A> | Some<A>
+
+const optNone: Option<never> = new None()
+const optSome = <A>(a: A): Option<A> => new Some(a)
+
+
+const tryFold = <A>(S: Semigroup<A>) => (
+  as: Array<A>
+): Option<A> =>
+  as.length === 0 ? optNone : optSome(fold(S)(as[0], as.slice(1)))
+
+console.log("tryFold(sum)([1, 2, 3]):",
+tryFold(sum)([1, 2, 3]) // some(6)
+)
+
+console.log("tryFold(sum)([]):",
+tryFold(sum)([]) // none
+)
