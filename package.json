@@ -4,7 +4,7 @@
   "main": "index.js",
   "dependencies": {
     "fp-ts": "^1.12.2",
-    "immer": "^2.1.5",
+    "immer": "^8.0.1",
     "typescript": "^3.2.2"
   },
   "devDependencies": {},
